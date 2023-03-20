@@ -38,6 +38,7 @@
       margin-top: 8px;
       padding-left: 8px;
       list-style-type: none;
+      cursor: pointer;
       a {
         color: #fff;
         background-color: #000;
@@ -47,6 +48,10 @@
         line-height: 1;
         font-size: 1.2rem;
       }
+    }
+
+    :global(li.-select a) {
+      color: var(--color-gold);
     }
   }
 }
@@ -88,7 +93,7 @@
 
       .card__title {
         font-weight: bold;
-        color: #e6b422;
+        color: var(--color-gold);
       }
 
       .card__url {

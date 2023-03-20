@@ -13,6 +13,7 @@ export type Work = {
 export type Tag = {
     id: string;
     title: string;
+    selected: boolean;
     createdAt: string;
     updatedAt: string;
     revisedAt: string;

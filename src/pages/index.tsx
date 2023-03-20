@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Head from 'next/head'
 import Link from "next/link";
 import Image from 'next/image'
@@ -9,8 +10,8 @@ import { Edit, Settings } from 'react-feather';
 import styles from '@/styles/Home.module.scss';
 
 export const getStaticProps = async () => {
-  const work = await client.get({ endpoint: 'work' });
-  const tag = await client.get({ endpoint: 'tag' });
+  const work = await client.get({ endpoint: 'work', queries: { limit: 100 } });
+  const tag = await client.get({ endpoint: 'tag', queries: { limit: 100 } });
 
   return {
     props: {
@@ -30,11 +31,43 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   tags,
 }: Props) => {
 
-  console.log(works);
+  const [selectTags, setSelectTags] = useState<string[]>([]);
+  const [tagsState, setTagsState] = useState(tags);
+  const [showWorks, setShowWorks] = useState(works);
+
+  const filterTag = (tag: Tag) => {
+    tag.selected = !tag.selected;
+    if (tag.selected) {
+      setSelectTags([...selectTags, tag.title]);
+    } else {
+      setSelectTags(
+        selectTags.filter((value, index) => (value !== tag.title))
+      );
+    }
+  }
+
+  useEffect(() => {
+    if (selectTags.length <= 0) {
+      // 選択されたタグが0件の場合、すべてのWorksを表示
+      setShowWorks(works);
+    } else {
+      let resultList: Work[] = [];
+      works.slice(0).forEach((element, key) => {
+        const filterList = element.tags.filter((value) => selectTags.includes(value.title))
+        if (filterList.length > 0) {
+          resultList.push(element);
+        }
+      });
+      setShowWorks(resultList);
+    }
+  }, [selectTags])
+
   return(
     <>
       <Head>
         <title>ポートフォリオ</title>
+        <meta property="robots" content="noindex" />
+        <meta property="referrer" content="no-referrer" />
       </Head>
       <main className={styles.main}>
         <h1>Portfolio</h1>
@@ -52,16 +85,18 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <h2 className={styles.headline}><Edit />Works</h2>
         <div className={styles.tags}>
           <ul>
-          {tags.map((tag) => (
-              <li key={tag.id}>
-                <a>{tag.title}</a>
+          {tagsState.map((tag: Tag) => (
+              <li key={tag.id} className={ tag.selected ? '-select' : '' }>
+                <a onClick={() => {
+                  filterTag(tag);
+                }}>{tag.title}</a>
               </li>
               ))}
           </ul>
         </div>
         <div className={styles.cards}>
           <ul className={styles.cards}>
-            {works.map((work) => (
+            {showWorks.map((work) => (
               <li key={work.id} className={styles.card}>
                 <div className={styles.card__inner}>
                   <Image
