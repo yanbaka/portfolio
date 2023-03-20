@@ -3,13 +3,32 @@
 .main {
   max-width: 1000px;
   margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding: 4rem 2.4rem;
+  letter-spacing: 0.04em;
+  font-feature-settings: "palt"
+}
+
+.headline {
+  margin-top: 8rem;
+  display: flex;
+  align-items: center;
+  svg {
+    margin-right: 0.4rem;
+  }
+}
+
+.skill {
+  margin-top: 1.6rem;
+  ul {
+    li {
+      list-style-type: none;
+    }
+  }
 }
 
 .tags {
   overflow: hidden;
-  margin-top: 4rem;
+  margin-top: 1.6rem;
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -53,6 +72,8 @@
         word-wrap: break-word;
         box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
         border-radius: 16px;
+        overflow: hidden;
+        height: 100%;
       }
 
       .card__info {
@@ -62,11 +83,12 @@
       .card__image {
         object-fit: cover;
         position: static !important;
-        height: auto !important;
+        height: 16rem !important;
       }
 
       .card__title {
         font-weight: bold;
+        color: #e6b422;
       }
 
       .card__url {
