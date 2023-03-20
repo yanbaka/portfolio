@@ -6,6 +6,7 @@ import type { InferGetStaticPropsType, NextPage } from 'next';
 import { client } from '@/libs/client';
 import type { Work, Tag } from '@/types/work';
 import { Edit, Settings } from 'react-feather';
+import { shuffle } from "lodash";
 
 import styles from '@/styles/Home.module.scss';
 
@@ -53,12 +54,12 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   useEffect(() => {
     if (selectTags.length <= 0) {
       // 選択されたタグが0件の場合、すべてのWorksを表示
-      setShowWorks(works);
+      setShowWorks(shuffle(works));
     } else {
       let resultList: Work[] = [];
       works.slice(0).forEach((element, key) => {
         const filterList = element.tags.filter((value) => selectTags.includes(value.title))
-        if (filterList.length > 0) {
+        if (filterList.length === selectTags.length) {
           resultList.push(element);
         }
       });
