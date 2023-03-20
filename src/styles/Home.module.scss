@@ -1,0 +1,91 @@
+@use '@/styles/variables.scss' as v;
+
+.main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.tags {
+  overflow: hidden;
+  margin-top: 4rem;
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -8px;
+    margin-left: -8px;
+    li {
+      margin-top: 8px;
+      padding-left: 8px;
+      list-style-type: none;
+      a {
+        color: #fff;
+        background-color: #000;
+        border-radius: 9999px;
+        padding: 8px;
+        display: block;
+        line-height: 1;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+.cards {
+  margin-top: 2.4rem;
+  >ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -16px;
+    margin-left: -16px;
+    >li {
+      width: calc(100% / 3);
+      list-style-type: none;
+      margin-top: 16px;
+      padding-left: 16px;
+
+      @include v.mq(md) {
+        width: 100%;
+      }
+
+      .card__inner {
+        word-wrap: break-word;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        border-radius: 16px;
+      }
+
+      .card__info {
+        padding: 8px 16px;
+      }
+  
+      .card__image {
+        object-fit: cover;
+        position: static !important;
+        height: auto !important;
+      }
+
+      .card__title {
+        font-weight: bold;
+      }
+
+      .card__url {
+        font-size: 1.2rem;
+        color: #000;
+      }
+
+      .card__tags {
+        display: flex;
+        flex-wrap: wrap;
+        li {
+          list-style-type: none;
+          font-size: 1.2rem;
+          margin-right: 0.8rem;
+          margin-top: 0.8rem;
+        }
+      }
+    }
+  }
+  
+}
+
