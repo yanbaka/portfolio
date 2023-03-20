@@ -46,6 +46,10 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
     }
   }
 
+  const thumbnail = (work: Work) => {
+    return work.thumbnail ? work.thumbnail.url : `https://placehold.jp/32/003060/e0e0e0/300x200.png?text=noImage`;
+  }
+
   useEffect(() => {
     if (selectTags.length <= 0) {
       // 選択されたタグが0件の場合、すべてのWorksを表示
@@ -75,7 +79,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <div className={styles.skill}>
           <ul>
             <li>フロントエンド： HTML、CSS、JavaScript</li>
-            <li>フレームワーク、ライブラリ： jQuery、React（Next.js）、Vue（Nuxt.js）</li>
+            <li>フレームワーク、ライブラリ： jQuery、TypeScript、React（Next.js）、Vue（Nuxt.js）</li>
             <li>CMS構築： WordPress、microCMS</li>
             <li>アプリ開発： ReactNative（Expo）</li>
             <li>インフラ構築： VPS、AWS</li>
@@ -100,13 +104,10 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
               <li key={work.id} className={styles.card}>
                 <div className={styles.card__inner}>
                   <Image
-                    src={work.thumbnail && work.thumbnail.url}
+                    src={thumbnail(work)}
                     alt=""
                     fill
                     className={styles.card__image}
-                    onError={(e) => {
-                      e.currentTarget.src = `https://placehold.jp/32/003060/e0e0e0/300x200.png?text=noImage`
-                    }}
                   ></Image>
                   <div className={styles.card__info}>
                     <p className={styles.card__title}>{work.title}</p>
