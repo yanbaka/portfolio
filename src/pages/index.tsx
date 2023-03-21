@@ -106,7 +106,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <ul className={styles.cards}>
             {showWorks.map((work) => (
               <li key={work.id} className={styles.card}>
-                {/* {work.tooltip && <Tooltip id={work.id + "-tooltip"} /> } */}
+                {work.tooltip && <Tooltip id={work.id + "-tooltip"} /> }
                 <div className={styles.card__inner} data-tooltip-id={work.id + "-tooltip"} data-tooltip-content={work.tooltip}>
                   <Image
                     src={thumbnail(work)}
