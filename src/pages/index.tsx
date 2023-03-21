@@ -8,6 +8,9 @@ import type { Work, Tag } from '@/types/work';
 import { Edit, Settings } from 'react-feather';
 import { shuffle } from "lodash";
 
+import 'react-tooltip/dist/react-tooltip.css';
+import { Tooltip } from 'react-tooltip';
+
 import styles from '@/styles/Home.module.scss';
 
 export const getStaticProps = async () => {
@@ -103,10 +106,11 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           <ul className={styles.cards}>
             {showWorks.map((work) => (
               <li key={work.id} className={styles.card}>
-                <div className={styles.card__inner}>
+                {work.tooltip && <Tooltip id={work.id + "-tooltip"} /> }
+                <div className={styles.card__inner} data-tooltip-id={work.id + "-tooltip"} data-tooltip-content={work.tooltip}>
                   <Image
                     src={thumbnail(work)}
-                    alt=""
+                    alt={work.title}
                     fill
                     className={styles.card__image}
                   ></Image>

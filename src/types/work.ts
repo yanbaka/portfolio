@@ -3,6 +3,7 @@ export type Work = {
     title: string;
     url: string;
     tags: Tag[];
+    tooltip: string;
     thumbnail: Thumbnail;
     createdAt: string;
     updatedAt: string;
