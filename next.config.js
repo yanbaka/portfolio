@@ -5,6 +5,9 @@ const nextConfig = {
   images: {
     domains: ['images.microcms-assets.io', 'placehold.jp'],
   },
+  experimental: {
+    optimizeFonts: true,
+  },
 }
 
 module.exports = nextConfig
