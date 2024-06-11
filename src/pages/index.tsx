@@ -86,11 +86,11 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <div className={styles.skill}>
           <ul>
             <li>フロントエンド： HTML、CSS、JavaScript</li>
-            <li>フレームワーク、ライブラリ： jQuery、TypeScript、React（Next.js）、Vue（Nuxt.js）</li>
+            <li>フレームワーク、ライブラリ： jQuery、TypeScript、React（Next.js）、Vue（Nuxt.js）、Astro</li>
             <li>CMS構築： WordPress、microCMS</li>
             <li>アプリ開発： ReactNative（Expo）</li>
             <li>インフラ構築： VPS、AWS</li>
-            <li>開発環境構築： Webpack、Gulp</li>
+            <li>開発環境構築： Webpack、Gulp、Vite</li>
           </ul>
         </div>
         <h2 className={styles.headline}><Edit />Works</h2>
